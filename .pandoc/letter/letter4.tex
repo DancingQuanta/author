@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\setlength{\parindent}{0pt}% Remove paragraph indent
+
+\begin{document}
+%\hspace*{0.5\linewidth}
+\hfill\begin{minipage}{0.3\linewidth}
+	Osborne House \\
+	University of Bath \\
+	Bath, BA2 7AY \\
+	\\
+	\today \\
+\end{minipage}
+
+$if(addressee)$
+\begin{minipage}{0.4\linewidth}
+	$addressee$\\
+	$if(street1)$$street1$\\$endif$
+	$if(street2)$$street2$\\$endif$
+	$if(city)$$city$\\$endif$
+	$if(region)$$region$\\$endif$
+	$if(country)$$country$\\$endif$
+	$if(postcode)$$postcode$\\$endif$
+\end{minipage}
+$endif$
+
+$if(greetings)$$greetings$ \par \bigskip $endif$
+
+$body$ \par \bigskip
+
+Sincerely, \par \medskip
+
+\includegraphics[height=1.5\baselineskip]{D:/Users/Andrew/.dotfiles/pandoc/letter/signature/signature.eps} \par
+Andrew Tolmie
+\end{document}

@@ -1,0 +1,56 @@
+\ProvidesPackage{personalcv}[2015/01/14 v1.0 personal cv effects]
+\RequirePackage{calc}
+
+\definecolor{color0}{rgb}{0,0,0}% black
+\definecolor{color1}{rgb}{0.22,0.45,0.70}% light blue
+\definecolor{color2}{rgb}{0.45,0.45,0.45}% dark grey
+
+\newcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
+\newcommand*{\titlefont}{\LARGE\rmfamily\bfseries\upshape}
+\newcommand*{\addressfont}{\small\mdseries\slshape}
+\newcommand*{\quotefont}{\large\slshape}
+\newcommand*{\sectionfont}{\Large\rmfamily\bfseries\upshape}
+\newcommand*{\subsectionfont}{\large\rmfamily\bfseries\scshape}
+
+%\scshape
+
+\newcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
+\newcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{#1}}}
+\newlength{\baseletterheight}
+\newlength{\hintscolumnwidth}
+\newlength{\separatorcolumnwidth}
+\newlength{\maincolumnwidth}
+
+\newcommand*{\recomputelengths}{%
+%\settoheight{\baseletterheight}{\sectionstyle{o}}
+%\setlength{\baseletterheight}{\baseletterheight-0.95ex}
+\setlength{\hintscolumnwidth}{0.175\textwidth}
+\setlength{\separatorcolumnwidth}{0.025\textwidth}
+\setlength{\maincolumnwidth}{\textwidth-\separatorcolumnwidth-\hintscolumnwidth}}
+
+% \RenewDocumentCommand{\section}{sm}{%
+  % \par\addvspace{2.5ex}%
+  % \phantomsection{}% reset the anchor for hyperrefs
+  % \addcontentsline{toc}{section}{#2}%
+  % \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{0.95ex}}}%
+  % \hspace{\separatorcolumnwidth}%
+  % \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}}%
+  % \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
+
+%\RenewDocumentCommand{\subsection}{sm}{%
+%  \par\addvspace{1ex}%
+%  %\phantomsection{}% reset the anchor for hyperrefs
+%  \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+%    \raggedleft &{\strut\subsectionstyle{#2}}%
+%	% \raggedleft\hintstyle{} &{\strut\subsectionstyle{#2}}%
+%  \end{tabular}%
+%  \par\nobreak\addvspace{0.5ex}\@afterheading}% to avoid a pagebreak after the heading
+  
+\RenewDocumentCommand{\subsection}{sm}{%
+  \par\addvspace{2.5ex}%
+  \addcontentsline{toc}{section}{#2}%
+  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{0.95ex}}}%
+  \hspace{\separatorcolumnwidth}%
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}\hspace{\separatorcolumnwidth}%
+    \strut\raisebox{\baseletterheight}{\color{color1}\rule{\maincolumnwidth-\widthof{\sectionstyle{#2}}-\separatorcolumnwidth}{0.95ex}}}%
+  \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading

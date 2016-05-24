@@ -1,0 +1,51 @@
+\documentclass[stdletter,sigleft,orderfromdateto,dateno]{newlfm}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\newlfmP{noLines}
+
+\headermarginsize{0mm}
+\addrfromskipbefore{0mm}
+\closeskipbefore{\baselineskip}
+\closeskipafter{0mm}
+%\sigsize{0.25\baselineskip}
+% \sigsize{50pt}
+% \sigskipbefore{50pt}
+
+\namefrom{Andrew Tolmie}
+\addrfrom{Andrew Tolmie \\
+	Osborne House \\
+	University of Bath \\
+	Bath, BA2 7AY \\
+	at.andrewtolmie@gmail.com \\
+	07891338151 (text only) \\
+	\\
+	$if(date)$$date$$else$\today$endif$ \\
+}
+
+$if(addressee)$
+\nameto{$addressee$}
+\addrto{
+	$if(street1)$$street1$\\$endif$
+	$if(street2)$$street2$\\$endif$
+	$if(city)$$city$\\$endif$
+	$if(region)$$region$\\$endif$
+	$if(country)$$country$\\$endif$
+	$if(postcode)$$postcode$\\$endif$
+}
+$else$
+\addrfromskipafter{\baselineskip}
+\addrtoskipbefore{0mm}
+\addrtoskipafter{0mm}
+$endif$
+
+\begin{document}
+
+\greetto{$greetings$}
+\closeline{Sincerely,\newline}
+
+\signature{\includegraphics[height=1.5\baselineskip]{D:/Users/Andrew/.dotfiles/pandoc/letter/signature/signature.eps}}
+
+\begin{newlfm}
+$body$
+\end{newlfm}
+\end{document}

@@ -1,0 +1,93 @@
+\ProvidesPackage{myphysics}[2013/01/13 Custom Package]
+\RequirePackage{physics}
+% Braces on both sides of cases
+\newenvironment{bcases}
+  {\left\lbrace\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Maths
+\DeclareMathOperator{\sinc}{sinc}
+
+% Vectors
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}} % for vectors
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} % for vectors of Greek letters
+\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector
+\newcommand{\ui}{\vu{\i}} % for i unit vector
+\newcommand{\uj}{\vu{\j}} % for j unit vector
+\newcommand{\uk}{\vu{k}}
+\newcommand{\ux}{\vu{x}}
+\newcommand{\uy}{\vu{y}}
+\newcommand{\uz}{\vu{z}}
+\newcommand{\uve}[1]{\uv{e}_{#1}} % for unit vector
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vk}{\vec{k}}
+
+% Matrix
+\newcommand{\matr}[1]{\mathbf{#1}}
+\DeclareMathOperator{\im}{im} % Image of a matrix
+
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+\newcommand{\mean}[1]{\bar{#1}} % for mean
+\newcommand{\fracb}[2]{\left(\frac{#1}{#2}\right)} % bracket around a fraction
+\let\d\underdot % rename builtin command \d{} to \underdot{}
+
+\newcommand{\pdc}[3]{\left. \pdv{#1}{#2} \right|_{#3}}
+
+% \let\baraccent=\= % rename builtin command \= to \baraccent
+% \renewcommand{\=}[1]{\stackrel{#1}{=}} % for putting numbers above =
+
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark} 
+
+% flexible integrals
+\newcommand*{\intf}{%
+  \@ifnextchar_{\intf@sub}{%
+    \@ifnextchar^{\intf@sup}{%
+      \intf@{}{}%
+    }%
+  }%
+}
+\def\intf@sub_#1{%
+  \@ifnextchar^{%
+    \intf@sub@sup{#1}%
+  }{%
+    \intf@{#1}{}%
+  }%
+}
+\def\intf@sup^#1{%
+  \@ifnextchar_{%
+    \intf@sup@sub{#1}%
+  }{%
+    \intf@{}{#1}%
+  }%
+}
+\def\intf@sub@sup#1^#2{\intf@{#1}{#2}}
+\def\intf@sup@sub#1_#2{\intf@{#2}{#1}}
+\def\intf@#1#2#3d#4{%
+  \int
+  \ifx\\#1\\\else _{#1}\fi
+  \ifx\\#2\\\else ^{#2}\fi
+  \!#3\,\mathrm{d}#4%
+}
+
+% Physics
+\AtBeginDocument{\newcommand{\photondensity}{\rho_\nu}}
+\AtBeginDocument{\newcommand{\freq}{\nu}}
+\newcommand{\wn}{\tilde{\nu}} % wavenumber
+\newcommand{\length}{\ell}
+\newcommand{\term}[3]{^{#1}#2_{#3}}
+\newcommand{\NA}{\mathrm{NA}}
+
+\newcommand{\ft}[1]{\mathcal{F}\left[#1\right]}
+\newcommand{\ham}{\mathcal{H}}
+\newcommand{\lapl}[1]{{\mathcal{L}\left[#1\right]}}
+
+% Misc
+\newcommand{\hfs}{\ensuremath{\mathrm{hfs}}}
+\newcommand{\eff}{\ensuremath{\mathrm{eff}}}
+

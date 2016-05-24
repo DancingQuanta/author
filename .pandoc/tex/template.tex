@@ -1,0 +1,154 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[12pt,a4paper]{article} % a4 dimension 210X297mm 21x29.7cm 595.3x841.9pts
+
+\usepackage[margin=2cm]{geometry} % 56.69 pts
+\usepackage[english]{babel} % English language/hyphenation
+
+\usepackage[T1]{fontenc}
+\usepackage[mono=false]{libertine}
+\usepackage[scaled=0.85]{beramono}%% or 0.82
+\usepackage{verbatim}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\usepackage{amssymb,amsfonts,amsthm} % Math packages
+\usepackage[libertine]{newtxmath}
+\usepackage[separate-uncertainty=true,multi-part-units=single]{siunitx}
+\usepackage{gensymb}
+\usepackage{mathtools}
+\usepackage[font=small,skip=0pt,labelfont=bf,textfont=it,up]{caption}
+\usepackage{float}
+\usepackage[pdftex]{graphicx}
+\usepackage{subcaption}
+\usepackage{transparent}
+\usepackage{xcolor}
+\usepackage{longtable,booktabs}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.12}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows,snakes,calc,positioning}
+\usepackage{epstopdf}
+\usepackage{morefloats}
+\usepackage{csquotes}
+\usepackage{import}% For the pdf_tex as the pdf_tex reference to another file
+
+$if(headfoot)$
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[R]{Confidential}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{Andrew Tolmie}
+\renewcommand{\footrulewidth}{0.4pt}
+$endif$
+
+$if(biblatex)$
+\usepackage[
+backend=biber,
+style=numeric
+]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$else$
+\AtBeginDocument{\newcommand{\autocite}[1]{#1}}
+$endif$
+
+% --- hyperref
+\usepackage{url}
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\usepackage{cleveref}
+
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+\usepackage{listings}
+\lstset{
+basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true}
+
+\setlength{\parindent}{1em}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\AtBeginDocument{\renewcommand{\Re}[1]{\operatorname{Re}#1}}
+\AtBeginDocument{\renewcommand{\Im}[1]{\operatorname{Im}#1}}
+  
+$if(debug)$
+\usepackage{showframe}
+$endif$
+
+$if(title)$
+\title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+
+%Replace every occurance of ref with cref
+\AtBeginDocument{\renewcommand{\ref}[1]{\cref{#1}}}
+
+\begin{document}
+$if(title)$
+$if(titlepage)$
+\thispagestyle{empty}
+\begin{center}
+\begin{minipage}{0.75\linewidth}
+    \centering
+%University logo
+    \includegraphics[width=\linewidth]{figures/logos/bath-logo.jpg}
+	~
+    \includegraphics[width=\linewidth]{figures/logos/renishaw-logo-large-fg-cropped.png}
+
+    \vspace{3cm}
+%Thesis title
+    {\uppercase{\Large $title$\par}}
+    \vspace{3cm}
+%Author's name
+    {\Large $author$\par}
+    \vspace{1em}
+%Degree
+    {\Large MSci Natural Sciences with Professional Placement\par}
+    \vspace{3cm}
+\end{minipage}
+\end{center}
+\clearpage
+$else$
+\maketitle
+$endif$
+$endif$
+
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+$endif$
+
+$body$
+
+$if(biblatex)$
+\printbibliography[title=References]
+$endif$
+\end{document}

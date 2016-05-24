@@ -1,0 +1,29 @@
+\documentclass[11pt]{letter}
+
+\address{Andrew Tolmie \\ Osborne House \\ University of Bath \\ Bath, BA2 7AY}
+\signature{\unskip\vskip\smallskipamount Andrew Tolmie}
+
+\begin{document}
+$if(addressee)$
+\begin{letter}{$addressee$\\
+$if(street1)$$street1$\\
+$endif$
+$if(street2)$$street2$\\
+$endif$
+$if(city)$$city$\\
+$endif$
+$if(region)$$region$\\
+$endif$
+$if(country)$$country$\\
+$endif$
+$if(postcode)$$postcode$\\
+$endif$}
+$else$
+\begin{letter}{\mbox{}\\\mbox{}}
+$endif$
+
+$body$
+
+\closing{Sincerely,}
+\end{letter}
+\end{document}

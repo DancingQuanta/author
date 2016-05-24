@@ -1,0 +1,57 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[mono=false]{libertine}
+\usepackage[scaled=0.85]{beramono}%% or 0.82
+\usepackage{xcolor}
+\usepackage{xparse}
+
+$if(tables)$
+\usepackage{longtable,booktabs,multirow}
+$endif$
+
+% DOCUMENT LAYOUT
+\usepackage[margin=1in]{geometry} 
+\setlength\parindent{0in}
+\pagestyle{empty} % Remove pagenumbers
+
+% fix for pandoc 1.14
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Reduce spacing in itemize, enumerate and titles
+\usepackage{multicol}
+\usepackage{enumitem}
+\setlist[enumerate]{nolistsep}
+\setlist[itemize]{nolistsep}
+\setlist[description]{leftmargin=!,labelwidth=5em}
+
+% FONTS
+% \usepackage{xunicode}
+% \usepackage{xltxtra}
+% \defaultfontfeatures{Mapping=tex-text} % converts LaTeX specials (quotes'' --- dashes etc.) to unicode
+% \setromanfont[Ligatures={Common}, Numbers={OldStyle}]{Palatino}
+% \setmonofont[Scale=1.0]{Monaco} 
+% \setsansfont[Scale=1.0]{Optima Regular} 
+
+\usepackage{personalcv}
+\usepackage{microtype}
+
+\usepackage{titling}
+\setlength{\droptitle}{-90pt} % The negative number moves the title closer to the top of the page
+\title{\titlefont{$title$}} % name $if(title)$$title$$endif$
+\date{$if(date)$$date$\\$endif$} % Leave blank to remove the date
+\author{$address$\\$if(address2)$$address2$\\$endif$
+$email$\\
+$phone$}
+
+\pretitle{\begin{center}\titlefont}
+\posttitle{\par\end{center}\vskip 0.25em}
+
+%\usepackage{showframe}
+
+% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+\recomputelengths
+$body$
+\end{document}
