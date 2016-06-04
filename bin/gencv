@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# ****************************************************
+#
+#   gencv
+#
+#   Compile a cv from markdown formatted cv
+#
+# ----------------------------------------------------
+#   Dependencies
+# ----------------------------------------------------
+#
+#   pandoc, template.tex
+#
+# ----------------------------------------------------
+#   Usage
+# ----------------------------------------------------
+#
+#  `gencv file.md`
+#
+# ****************************************************
+
+# Error handling
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# ----------------------------------------------------
+#   Variables
+# ----------------------------------------------------
+
+template=`cygpath -w -a $HOME/.pandoc/tex/cv.tex`
+
+# ----------------------------------------------------
+#   Functions
+# ----------------------------------------------------
+
+gencv() {
+	if [ -f $1 ]; then
+		filename=$(basename "$1")
+		extension="${filename##*.}"
+		filename="${filename%.*}"
+		if [ "$extension" == "md" ]; then
+			pandoc -s $1 -o "$filename.pdf" --template="$template"
+		else
+			echo "$1 is a wrong file type"
+		fi
+	else
+		echo "$1 does not exist"
+	fi
+}
+
+# ----------------------------------------------------
+#   Main
+# ----------------------------------------------------
+
+# MAIN
+gencv $1

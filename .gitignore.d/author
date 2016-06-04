@@ -1,0 +1,12 @@
+*
+!/bin/
+!/bin/gencv
+!/bin/genletter
+!/bin/md2pdf
+!/bin/md2tex
+!/bin/md2word
+!/.latexmkrc
+!/.pandoc/**
+!/texmf/**
+!/.gitignore.d/
+!/.gitignore.d/author

@@ -1,0 +1,58 @@
+#!/usr/bin/sh
+# ****************************************************
+#
+#   genletter
+#
+#   Compile a letter from markdown formatted letter
+#
+# ----------------------------------------------------
+#   Dependencies
+# ----------------------------------------------------
+#
+#   pandoc, template.tex
+#
+# ----------------------------------------------------
+#   Usage
+# ----------------------------------------------------
+#
+#  `genletter file.md`
+#
+# ****************************************************
+
+# Error handling
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# ----------------------------------------------------
+#   Variables
+# ----------------------------------------------------
+
+template=`cygpath -w -a $HOME/.pandoc/letter/letter.tex`
+
+# ----------------------------------------------------
+#   Functions
+# ----------------------------------------------------
+
+genletter() {
+	if [ -f $1 ]; then
+		filename=$(basename "$1")
+		extension="${filename##*.}"
+		filename="${filename%.*}"
+		if [ "$extension" == "md" ]; then
+			pandoc -s $1 -o "$filename.pdf" --template="$template"
+		else
+			echo "$1 is a wrong file type"
+		fi
+	else
+		echo "$1 does not exist"
+	fi
+}
+
+# ----------------------------------------------------
+#   Main
+# ----------------------------------------------------
+
+# MAIN
+genletter $1

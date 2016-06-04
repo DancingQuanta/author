@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# ****************************************************
+#
+#   md2pdf
+#
+#   Compile a markdown file to pdf
+#
+# ----------------------------------------------------
+#   Dependencies
+# ----------------------------------------------------
+#
+#   pandoc, template.tex
+#
+# ----------------------------------------------------
+#   Usage
+# ----------------------------------------------------
+#
+#  `md2pdf file.md`
+#
+# ****************************************************
+
+# Error handling
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# ----------------------------------------------------
+#   Variables
+# ----------------------------------------------------
+
+template=`cygpath -w -a $HOME/.pandoc/tex/report.tex`
+
+# ----------------------------------------------------
+#   Functions
+# ----------------------------------------------------
+
+md2pdf() {
+	if [ -f $1 ]; then
+		filename=$(basename "$1")
+		extension="${filename##*.}"
+		filename="${filename%.*}"
+		if [ "$extension" == "md" ]; then
+			pandoc -s $1 -o "$filename.pdf" --template="$template"
+		else
+			echo "$1 is a wrong file type"
+		fi
+	else
+		echo "$1 does not exist"
+	fi
+}
+
+# ----------------------------------------------------
+#   Main
+# ----------------------------------------------------
+
+# MAIN
+md2pdf $1
