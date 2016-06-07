@@ -5,6 +5,7 @@
 !/bin/md2pdf
 !/bin/md2tex
 !/bin/md2word
+!/bin/texmk
 !/.latexmkrc
 !/.pandoc/**
 !/texmf/**
