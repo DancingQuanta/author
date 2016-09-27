@@ -20,7 +20,6 @@
 \usepackage[table]{xcolor}
 \usepackage[font=small,skip=0pt,labelfont=bf,textfont=it,up]{caption}
 
-$if(graphics)$
 \usepackage[pdftex]{graphicx}
 \graphicspath{./}
 \usepackage{subcaption}
@@ -35,13 +34,10 @@ $if(graphics)$
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-$endif$
 
-$if(tables)$
 \usepackage{longtable,booktabs,multirow}
 \usepackage{pgfplotstable}
 \pgfplotsset{compat=1.12}
-$endif$
 
 \usepackage{float}
 \usepackage{csquotes}
@@ -82,27 +78,53 @@ basicstyle=\small\ttfamily,
 columns=flexible,
 breaklines=true}
 
+% Environments
+
+\theoremstyle{plain}
+$for(latex-environment.plain)$
+\newtheorem{$latex-environment.plain$}{$latex-environment.plain$}[$latex-environment.parentcounter$]
+$endfor$
+$for(latex-environment.plain-unnumbered)$
+\newtheorem*{$latex-environment.plain-unnumbered$}{$latex-environment.plain-unnumbered$}
+$endfor$
+\theoremstyle{definition}
+$for(latex-environment.definition)$
+\newtheorem{$latex-environment.definition$}{$latex-environment.definition$}[$latex-environment.parentcounter$]
+$endfor$
+$for(latex-environment.definition-unnumbered)$
+\newtheorem*{$latex-environment.definition-unnumbered$}{$latex-environment.definition-unnumbered$}
+$endfor$
+\theoremstyle{remark}
+$for(latex-environment.remark)$
+\newtheorem{$latex-environment.remark$}{$latex-environment.remark$}[$latex-environment.parentcounter$]
+$endfor$
+$for(latex-environment.remark-unnumbered)$
+\newtheorem*{$latex-environment.remark-unnumbered$}{$latex-environment.remark-unnumbered$}
+$endfor$
+
+% Misc
+
 \setlength{\parindent}{1em}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
 	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-% Misc
-
 \newcommand\sparbox[3][c]{\parbox[#1]{#2}{\strut\strut#3\strut\strut}}
-	
+
+\listfiles % What files are used to create the PDF?
+
+%Replace every occurance of ref with cref
+\AtBeginDocument{\renewcommand{\ref}[1]{\cref{#1}}}
+
+% Head
+
 $if(title)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
 $endif$
 $if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 $endif$
-
-\listfiles % What files are used to create the PDF?
-
-%Replace every occurance of ref with cref
-\AtBeginDocument{\renewcommand{\ref}[1]{\cref{#1}}}
 
 \begin{document}
 $if(title)$
