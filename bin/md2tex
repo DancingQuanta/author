@@ -30,7 +30,7 @@ set -o pipefail
 # ----------------------------------------------------
 
 TEMPLATE=`cygpath -w -a $HOME/.pandoc/tex/report.tex`
-PANDOC_OPTS="-s --listings --filter pandoc-eqnos --filter pandoc-fignos --filter pandoc-tablenos --template=$TEMPLATE --biblatex"
+PANDOC_OPTS="-s --listings --filter pandoc-eqnos --filter pandoc-fignos --filter pandoc-tablenos --template=$TEMPLATE"
 
 # ----------------------------------------------------
 #   Functions
