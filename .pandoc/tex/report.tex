@@ -57,7 +57,9 @@ $if(biblatex)$
 \usepackage[
 backend=biber,
 style=numeric,
-maxcitenames=2
+sorting=none,
+maxcitenames=2,
+bibencoding=utf8
 ]{biblatex}
 $for(bibliography)$
 \addbibresource{$bibliography$}
