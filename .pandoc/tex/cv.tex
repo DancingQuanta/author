@@ -5,10 +5,6 @@
 \usepackage{xcolor}
 \usepackage{xparse}
 
-$if(tables)$
-\usepackage{longtable,booktabs,multirow}
-$endif$
-
 % DOCUMENT LAYOUT
 \usepackage[margin=1in]{geometry} 
 \setlength\parindent{0in}
@@ -36,27 +32,24 @@ $endif$
 \usepackage{personalcv}
 \usepackage{microtype}
 
-\usepackage{titling}
-\setlength{\droptitle}{-90pt} % The negative number moves the title closer to the top of the page
-\title{\titlefont{$title$}} % name $if(title)$$title$$endif$
-\date{$if(date)$$date$\\$endif$} % Leave blank to remove the date
-\author{$address$\\$if(address2)$$address2$\\$endif$
-$email$\\
-$phone$}
-
-\pretitle{\begin{center}\titlefont}
-\posttitle{\par\end{center}\vskip 0.25em}
-
-%\preauthor{\begin{center}
-%\large \lineskip 0.5em%
-%\begin{tabular}[t]{c}}
-%\postauthor{\end{tabular}\par\end{center}\vskip 0.25em}
-
 %\usepackage{showframe}
 
 % BEGIN DOCUMENT
 \begin{document}
-\maketitle
+%\maketitle
+\begin{center}
+\titlefont $title$
+\end{center}
+%\vspace{0.25em}
+\begin{center}
+\large
+%\lineskip 0.1em
+\begin{tabular}[t]{c}
+$address$\\$if(address2)$$address2$\\$endif$
+$email$\\
+$phone$
+\end{tabular}\par\end{center}
+\vspace{0.25em}
 \vspace{-2em}
 \recomputelengths
 $body$
