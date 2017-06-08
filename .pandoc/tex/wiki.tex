@@ -111,6 +111,7 @@ $endfor$
 	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \newcommand\sparbox[3][c]{\parbox[#1]{#2}{\strut\strut#3\strut\strut}}
+\newcommand\subtext[1]{\text{\scriptsize\tabular[t]{@{}l@{}}#1\endtabular}}
 
 \listfiles % What files are used to create the PDF?
 
@@ -118,6 +119,10 @@ $endfor$
 \AtBeginDocument{\renewcommand{\ref}[1]{\cref{#1}}}
 
 % Head
+
+$for(header-includes)$
+$header-includes$
+$endfor$
 
 $if(title)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
