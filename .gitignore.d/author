@@ -12,6 +12,7 @@
 !/bin/md2tex
 !/bin/md2word
 !/bin/languagetool
+!/bin/svg2png
 !/bin/texmk
 !/texmf
 !/texmf/*
