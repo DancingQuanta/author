@@ -1,0 +1,70 @@
+#!/usr/bin/sh
+# ****************************************************
+#
+#   grabimages
+#
+#   Extract images from pdfs and convert extracted images from ppm to png format
+#
+# ----------------------------------------------------
+#   Dependencies
+# ----------------------------------------------------
+#
+#   pdfimages, imagemagick
+#
+# ----------------------------------------------------
+#   Usage
+# ----------------------------------------------------
+#
+#  `grabimages file.pdf`
+#
+# ****************************************************
+
+# Error handling
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# ----------------------------------------------------
+#   Variables
+# ----------------------------------------------------
+
+# ----------------------------------------------------
+#   Functions
+# ----------------------------------------------------
+
+exists()
+{
+  command -v "$1" >/dev/null 2>&1
+}
+
+grabimages() {
+  if ! exists pdfimages || ! exists mogrify; then
+    echo 'Your system does not have pdfimages or mogrify!'
+    exit 1
+  fi
+
+	if [ -f $1 ]; then
+		filename=$(basename "$1")
+		extension="${filename##*.}"
+		name="${filename%.*}"
+		if [ "$extension" == "pdf" ]; then
+      [[ -d $name ]] || mkdir $name
+      pdfimages $(cygpath -wa $1) $name/$name
+      cd $name
+      mogrify -format png *.ppm
+      #convert $(cygpath -wa $1) image.png
+		else
+			echo "$1 is a wrong file type"
+		fi
+	else
+		echo "$1 does not exist"
+	fi
+}
+
+# ----------------------------------------------------
+#   Main
+# ----------------------------------------------------
+
+# MAIN
+grabimages $1
