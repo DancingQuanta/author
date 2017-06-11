@@ -1,0 +1,60 @@
+#!/usr/bin/sh
+# ****************************************************
+#
+#   languagetool
+#
+#   Check spelling and grammer
+#   LanguageTool from https://www.languagetool.org/
+#
+# ----------------------------------------------------
+#   Dependencies
+# ----------------------------------------------------
+#
+#   languagetool-commandline.jar
+#
+# ----------------------------------------------------
+#   Usage
+# ----------------------------------------------------
+#
+#  `language file.md`
+#
+# ****************************************************
+
+# Error handling
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# ----------------------------------------------------
+#   Variables
+# ----------------------------------------------------
+
+DIR=$HOME/bin/LanguageTool-3.5
+LANGUAGETOOL=$DIR/languagetool-commandline.jar
+
+# ----------------------------------------------------
+#   Functions
+# ----------------------------------------------------
+
+languagetool() {
+	if [ -f $1 ]; then
+		filename=$(basename "$1")
+		extension="${filename##*.}"
+		filename="${filename%.*}"
+    output="$filename.txt"
+		if [ "$extension" == "md" ]; then
+      java -jar $(cygpath -aw $LANGUAGETOOL) $1 > "$1.txt"
+		else
+			echo "$1 is a wrong file type"
+		fi
+	else
+		echo "$1 does not exist"
+	fi
+}
+
+# ----------------------------------------------------
+#   Main
+# ----------------------------------------------------
+
+languagetool "$(cygpath -wa $1)"
