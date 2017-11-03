@@ -1,0 +1,6 @@
+## DancingQuanta/author-config - https://github.com/DancingQuanta/author-config
+## author-config.git
+## Setup DancingQuanta/author-config and dependant repositories
+
+[$HOME/.config/vcsh/repo.d/author-config.git]
+checkout = vcsh clone https://github.com/DancingQuanta/author-config

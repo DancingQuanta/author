@@ -1,6 +1,12 @@
 *
-!/.gitignore.d
-!/.gitignore.d/author
+!/.gitignore.d/
+!/.gitignore.d/author-config
+!/.config
+!/.config/mr
+!/.config/mr/available.d
+!/.config/mr/available.d/author-config.vcsh
+!/.config/mr/config.d
+!/.config/mr/config.d/author-config.vcsh
 !/.latexmkrc
 !/.pandoc
 !/.pandoc/*
