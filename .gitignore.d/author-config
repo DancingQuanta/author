@@ -23,3 +23,6 @@
 !/.local/bin/texmk
 !/texmf
 !/texmf/*
+!/.config/shell/
+!/.config/shell/config-local.d/
+!/.config/shell/config-local.d/authoring.sh
