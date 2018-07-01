@@ -21,6 +21,8 @@
 !/.local/bin/languagetool
 !/.local/bin/svg2png
 !/.local/bin/texmk
+!/.local/bin/joinpdf
+!/.local/bin/extrpdf
 !/texmf
 !/texmf/*
 !/.config/shell/

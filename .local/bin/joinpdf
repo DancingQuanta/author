@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# ****************************************************
+#
+#   joinpdf
+#
+#   Join pdf pages into a single pdf document
+#
+# ----------------------------------------------------
+#   Dependencies
+# ----------------------------------------------------
+#
+#   ghostscript
+#
+# ----------------------------------------------------
+#   Usage
+# ----------------------------------------------------
+#
+#  `joinpdf first second > output`
+#
+# ****************************************************
+
+# Error handling
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# ----------------------------------------------------
+#   Variables
+# ----------------------------------------------------
+
+template=`cygpath -w -a $HOME/.pandoc/tex/cv.tex`
+
+# ----------------------------------------------------
+#   Functions
+# ----------------------------------------------------
+
+joinpdf() {
+  gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -q \
+    -sOUTPUTFILE=/dev/stdout $@
+  # gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -sOUTPUTFILE=${BASH_ARGV[0]} $(
+  # for i in $(seq $(expr $# - 1) -1 1) 
+  # do  
+    # echo -n "${BASH_ARGV[$i]} " 
+  # done)
+}
+
+# ----------------------------------------------------
+#   Main
+# ----------------------------------------------------
+
+# MAIN
+joinpdf $@

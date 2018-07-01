@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# ****************************************************
+#
+#   extrpdf
+#
+#   Extract a range of pages from a pdf document.
+#
+# ----------------------------------------------------
+#   Dependencies
+# ----------------------------------------------------
+#
+#   ghostscript
+#
+# ----------------------------------------------------
+#   Usage
+# ----------------------------------------------------
+#
+#   extrpdf [input.pdf] [first_page] [last_page]
+#   $1 is the input file
+#   $2 is the first page of the range to extract
+#   $3 is the last page of the range to extract
+#   output file will be named "inputfile_pXX-pYY.pdf"
+#
+# ****************************************************
+
+# Error handling
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# ----------------------------------------------------
+#   Functions
+# ----------------------------------------------------
+
+extrpdf() {
+  gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
+    -sDEVICE=pdfwrite \
+    -sOutputFile=${1%.pdf}_p${2}-p${3}.pdf \
+    -dFirstPage=${2} \
+    -dLastPage=${3} \
+    ${1}
+}
+
+# ----------------------------------------------------
+#   Main
+# ----------------------------------------------------
+
+# MAIN
+extrpdf $@
